@@ -1,6 +1,6 @@
 use raylib::prelude::{Color, RaylibDraw};
-
-use crate::vec2::Vec2;
+use crate::prelude;
+use prelude::vec2::Vec2;
 
 pub trait Sprite {
     fn sprite_move(&mut self);
