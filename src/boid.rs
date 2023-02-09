@@ -4,7 +4,8 @@ pub mod sprite;
 use raylib::prelude::Color;
 use rand::{Rng, prelude::ThreadRng};
 
-use super::utils::{config, interact::n2};
+use super::prelude::config;
+use super::utils::interact::n2;
 use vec2::{Vec2, vec2};
 use sprite::Sprite;
 
