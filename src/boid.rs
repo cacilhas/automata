@@ -1,15 +1,12 @@
-pub mod config;
-pub mod f64fix;
-pub mod interact;
 pub mod vec2;
 pub mod sprite;
 
 use raylib::prelude::Color;
 use rand::{Rng, prelude::ThreadRng};
 
+use super::utils::{config, interact::n2};
 use vec2::{Vec2, vec2};
 use sprite::Sprite;
-use interact::n2;
 
 
 macro_rules! new_boid {

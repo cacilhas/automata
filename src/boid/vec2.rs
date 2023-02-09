@@ -1,6 +1,6 @@
 use std::ops::{Mul, Add, Sub};
 use libm::atan2;
-use super::f64fix::FromF64;
+use crate::utils::f64fix::FromF64;
 
 
 #[macro_export]

@@ -1,7 +1,9 @@
 mod boid;
+mod utils;
 
 use raylib::prelude::*;
-use boid::{config, sprite::Sprite};
+use utils::config;
+use boid::sprite::Sprite;
 
 
 fn main() {
