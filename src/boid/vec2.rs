@@ -1,15 +1,16 @@
 use std::ops::{Mul, Add, Sub};
 use libm::atan2;
-use crate::prelude;
-use prelude::f64fix::FromF64;
+use super::f64fix::FromF64;
 
 
 #[macro_export]
 macro_rules! vec2 {
     ($tp:ty; x: $x:expr, y: $y:expr) => {{
-        $crate::vec2::Vec2 {x: ($x) as $tp, y: ($y) as $tp}
+        crate::boid::vec2::Vec2 {x: ($x) as $tp, y: ($y) as $tp}
     }}
 }
+
+pub use vec2;
 
 
 pub trait Number: Add<Output=Self>+Sub<Output=Self>+Mul<Output=Self>+Into<f64>+FromF64 {}

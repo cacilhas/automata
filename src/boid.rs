@@ -1,10 +1,15 @@
+pub mod config;
+pub mod f64fix;
+pub mod interact;
+pub mod vec2;
+pub mod sprite;
+
 use raylib::prelude::Color;
 use rand::{Rng, prelude::ThreadRng};
 
-use crate::config;
-use crate::vec2;
-use crate::sprite::Sprite;
-use crate::interact::n2;
+use vec2::{Vec2, vec2};
+use sprite::Sprite;
+use interact::n2;
 
 
 macro_rules! new_boid {
@@ -27,9 +32,9 @@ macro_rules! new_boid {
 #[derive(Clone)]
 pub struct Boid {
     id: usize,
-    pub loc: vec2::Vec2<f32>,
+    pub loc: Vec2<f32>,
     pub w: i32,
-    force: vec2::Vec2<f32>,
+    force: Vec2<f32>,
     color: Color,
 }
 
@@ -48,7 +53,7 @@ impl Sprite for Boid {
     }
 
     #[inline]
-    fn location(&self) -> &vec2::Vec2<f32> {
+    fn location(&self) -> &Vec2<f32> {
         &self.loc
     }
 

@@ -1,8 +1,8 @@
-mod prelude;
+mod boid;
 
 use raylib::prelude::*;
-use crate::prelude::*;
-use self::sprite::Sprite;
+use boid::{config, sprite::Sprite};
+
 
 fn main() {
     let (mut handle, thread) = raylib::init()
