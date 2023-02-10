@@ -5,9 +5,17 @@ use crate::utils::f64fix::FromF64;
 
 #[macro_export]
 macro_rules! vec2 {
+    ($tp:ty) => {{
+        $crate::boid::vec2::Vec2 {x: 0 as $tp, y: 0 as $tp}
+    }};
+
+    (x: $x:expr, y: $y:expr) => {{
+        $crate::boid::vec2::Vec2 {x: ($x), y: ($y)}
+    }};
+
     ($tp:ty; x: $x:expr, y: $y:expr) => {{
-        crate::boid::vec2::Vec2 {x: ($x) as $tp, y: ($y) as $tp}
-    }}
+        $crate::boid::vec2::Vec2 {x: ($x) as $tp, y: ($y) as $tp}
+    }};
 }
 
 pub use vec2;

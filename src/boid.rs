@@ -10,23 +10,6 @@ use vec2::{Vec2, vec2};
 use sprite::Sprite;
 
 
-macro_rules! new_boid {
-    ($id:expr) => {{
-        let mut rng = ThreadRng::default();
-        Boid {
-            id: $id,
-            loc: vec2![f32;
-                x: rng.gen_range(0_f32..config::window::WIDTH),
-                y: rng.gen_range(0_f32..config::window::HEIGHT)
-            ],
-            force: vec2![f32; x: 0, y: 0],
-            w: 0,
-            color: Color::WHITE,
-        }
-    }};
-}
-
-
 #[derive(Clone)]
 pub struct Boid {
     id: usize,
@@ -62,9 +45,24 @@ impl Sprite for Boid {
 }
 
 impl Boid {
+
+    pub fn new(id: usize) -> Self {
+        let mut rng = ThreadRng::default();
+        Self {
+            id,
+            loc: vec2![
+                x: rng.gen_range(0_f32..config::window::WIDTH),
+                y: rng.gen_range(0_f32..config::window::HEIGHT)
+            ],
+            force: vec2![f32],
+            w: 0,
+            color: Color::WHITE,
+        }
+    }
+
     #[inline]
     pub fn reset_forces(&mut self) {
-        self.force = vec2![f32; x: 0, y: 0];
+        self.force = vec2![f32];
     }
 
     pub fn recalculate_color(&mut self, largest: i32) {
@@ -90,7 +88,7 @@ impl Boid {
 
 #[inline]
 pub fn create_boids(count: usize) -> Vec<Boid> {
-    (0..count).map(|id| new_boid!(id)).collect::<Vec<Boid>>()
+    (0..count).map(|id| Boid::new(id)).collect::<Vec<Boid>>()
 }
 
 pub fn update_boids(boids: &mut Vec<Boid>) {
