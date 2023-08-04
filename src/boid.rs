@@ -1,14 +1,13 @@
-pub mod vec2;
 pub mod sprite;
+pub mod vec2;
 
+use rand::{prelude::ThreadRng, Rng};
 use raylib::prelude::Color;
-use rand::{Rng, prelude::ThreadRng};
 
 use super::prelude::config;
 use super::utils::interact::n2;
-use vec2::{Vec2, vec2};
 use sprite::Sprite;
-
+use vec2::{vec2, Vec2};
 
 #[derive(Clone)]
 pub struct Boid {
@@ -20,7 +19,6 @@ pub struct Boid {
 }
 
 impl Sprite for Boid {
-
     fn sprite_move(&mut self) {
         let mut rng = ThreadRng::default();
         if self.force.x.abs() < 1.0 {
@@ -45,7 +43,6 @@ impl Sprite for Boid {
 }
 
 impl Boid {
-
     pub fn new(id: usize) -> Self {
         let mut rng = ThreadRng::default();
         Self {
@@ -67,7 +64,12 @@ impl Boid {
 
     pub fn recalculate_color(&mut self, largest: i32) {
         let w = (self.w * 256 / largest).min(255) as u8;
-        self.color = Color {r: 255_u8 - w, g: 0_u8, b: w, a: 255_u8}
+        self.color = Color {
+            r: 255_u8 - w,
+            g: 0_u8,
+            b: w,
+            a: 255_u8,
+        }
     }
 
     pub fn recalculate_forces(&mut self, other: &Boid) {
@@ -77,14 +79,15 @@ impl Boid {
             let angle = self.loc.angle_to(&other.loc);
             let mut force = -0.5;
             if diff != 0.0 {
-                force = (config::FORCE * diff * diff.abs() / sqr_dist).min(10.0).max(-10.0);
+                force = (config::FORCE * diff * diff.abs() / sqr_dist)
+                    .min(10.0)
+                    .max(-10.0);
             }
             self.force.x += force * angle.cos();
             self.force.y += force * angle.sin();
         }
     }
 }
-
 
 #[inline]
 pub fn create_boids(count: usize) -> Vec<Boid> {

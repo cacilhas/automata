@@ -1,5 +1,5 @@
-use raylib::prelude::{Color, RaylibDraw};
 use super::vec2::Vec2;
+use raylib::prelude::{Color, RaylibDraw};
 
 pub trait Sprite {
     fn sprite_move(&mut self);
@@ -8,10 +8,6 @@ pub trait Sprite {
 
     fn draw<T: RaylibDraw>(&self, handler: &mut T) {
         let loc = self.location();
-        handler.draw_pixel(
-            loc.x as i32,
-            loc.y as i32,
-            self.color(),
-        );
+        handler.draw_pixel(loc.x as i32, loc.y as i32, self.color());
     }
 }
